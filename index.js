@@ -3,7 +3,6 @@ const NATS = require('nats')
 const defaultOptions = {
   url: 'nats://localhost:4222',
   maxReconnectAttempts: -1, // infinite
-  reconnectTimeWait: 30 * 1000 // 30 seconds
 }
 
 module.exports = function connect (options) {
