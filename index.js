@@ -1,7 +1,30 @@
 const NATS = require('nats')
 
+const defaultOptions = {
+  url: 'nats://localhost:4222',
+  maxReconnectAttempts: -1, // infinite
+  reconnectTimeWait: 30 * 1000 // 30 seconds
+}
+
 module.exports = function connect (options) {
+  // process options
+  if (!options) options = {}
+  if (typeof options === 'string') options = {url: options}
+  options = Object.assign({}, defaultOptions, options)
+
+  // connect nats
   const nats = NATS.connect(options)
+
+  // define default event handlers
+  nats.on('error', (err) => {
+    console.error(err)
+    process.exit(-1)
+  })
+  nats.on('connect', () => console.log('method nats connected'))
+  nats.on('disconnect', () => console.log('method nats disconnected'))
+  nats.on('reconnecting', () => console.log('method nats reconnecting'))
+  nats.on('reconnect', () => console.log('method nats reconnected'))
+  nats.on('close', () => console.log('method nats connection closed'))
 
   let defaultTimeout = 60 * 1000 // 1 minute
   let methodPrefix = null
