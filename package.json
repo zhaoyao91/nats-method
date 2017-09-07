@@ -1,11 +1,12 @@
 {
   "name": "nats-method",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "help define and use methods by nats",
   "main": "index.js",
   "author": "zhaoyao91 <zhaoyao91@163.com>",
   "license": "MIT",
   "dependencies": {
+    "env-pino": "^1.0.1",
     "nats": "^0.7.20"
   }
 }
