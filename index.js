@@ -1,16 +1,9 @@
 const NATS = require('nats')
 const logger = require('env-pino')
 
-const defaultOptions = {
-  url: 'nats://localhost:4222',
-  maxReconnectAttempts: -1, // infinite
-}
-
 module.exports = function connect (options) {
   // process options
-  if (!options) options = {}
-  if (typeof options === 'string') options = {url: options}
-  options = Object.assign({}, defaultOptions, options)
+  options = processOptions(options)
 
   // connect nats
   const nats = NATS.connect(options)
@@ -81,4 +74,20 @@ module.exports = function connect (options) {
   }
 
   return nats
+}
+
+function processOptions (options) {
+  const defaultOptions = {
+    maxReconnectAttempts: -1, // infinite
+  }
+
+  if (!options) options = {}
+
+  if (typeof options === 'string') {
+    const urls = options.split(',')
+    if (urls.length === 1) options = {url: urls[0]}
+    else options = {servers: urls}
+  }
+
+  return Object.assign({}, defaultOptions, options)
 }
