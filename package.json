@@ -1,13 +1,13 @@
 {
   "name": "nats-method",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "help define and use methods by nats",
   "main": "index.js",
   "author": "zhaoyao91 <zhaoyao91@163.com>",
   "repository": "https://github.com/zhaoyao91/nats-method.git",
   "license": "MIT",
   "dependencies": {
-    "env-pino": "^1.0.1",
-    "nats": "^0.7.20"
+    "nats": "^0.7.20",
+    "simple-json-logger": "^1.1.0"
   }
 }

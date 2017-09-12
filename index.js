@@ -1,5 +1,5 @@
 const NATS = require('nats')
-const logger = require('env-pino')
+const logger = require('simple-json-logger')
 
 module.exports = function connect (options) {
   // process options
